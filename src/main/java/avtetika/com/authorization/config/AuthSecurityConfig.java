@@ -1,6 +1,6 @@
 package avtetika.com.authorization.config;
 
-import joinbuy.authorization.config.filter.JwtFilter;
+import avtetika.com.authorization.config.filter.JwtFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;

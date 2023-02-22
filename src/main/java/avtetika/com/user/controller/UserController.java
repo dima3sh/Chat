@@ -32,10 +32,4 @@ public class UserController {
         Boolean response = userService.isFreeParameter(parameter, type);
         return ResponseEntity.ok(response);
     }
-
-    @PutMapping(value = "/user/login/{login}")
-    public ResponseEntity<UserInfoDto> updateLogin(@RequestAttribute UUID userId, @PathVariable String login) {
-        UserInfoDto response = userService.findInfo(userId);
-        return ResponseEntity.ok(response);
-    }
 }
