@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -28,6 +29,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> findUsers(Collection<UUID> request) {
         return userRepository.findAllByUserIdIn(new ArrayList<>(request));
+    }
+
+    @Override
+    public List<UUID> findAll() {
+        return userRepository.findAll().stream().map(User::getUserId).collect(Collectors.toList());
     }
 
     @Override

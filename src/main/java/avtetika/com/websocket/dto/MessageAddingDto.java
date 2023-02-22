@@ -5,6 +5,9 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.time.LocalDateTime;
+import java.util.UUID;
+
 @Getter
 @Setter
 @ToString
@@ -15,6 +18,7 @@ public class MessageAddingDto extends AbstractAction {
     }
 
     private String text;
-    private String userId;
+    private UUID userId;
     private Boolean isUserOwner;
+    private LocalDateTime dateTime;
 }
