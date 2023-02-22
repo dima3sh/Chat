@@ -1,0 +1,101 @@
+buildscript {
+    ext {
+        springBootVersion = '2.7.2'
+        lombokVersion = '1.18.24'
+        javaxXmlVersion = '2.3.1'
+        liquibaseVersion = '4.8.0'
+        postgresqlVersion = '42.4.1'
+        mapStructVersion = '1.5.2.Final'
+
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath(
+                "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+plugins {
+    id 'java'
+    id 'java-library'
+    id "org.springframework.boot" version "2.7.2"
+}
+
+configurations {
+    developmentOnly
+    runtimeClasspath {
+        extendsFrom developmentOnly
+    }
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'src.main.java.Application'
+    }
+}
+
+compileJava {
+    options.compilerArgs += [
+            '-Amapstruct.suppressGeneratorTimestamp=true',
+            '-Amapstruct.suppressGeneratorVersionInfoComment=true',
+            '-Amapstruct.verbose=true'
+    ]
+}
+
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'org.springframework.boot'
+
+group 'joinbuy'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+test {
+    useJUnitPlatform()
+}
+
+dependencies {
+    implementation(group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: springBootVersion)
+    implementation group: 'org.springframework', name: 'spring-messaging', version: '5.3.22'
+
+    implementation(group: 'org.postgresql', name: 'postgresql', version: postgresqlVersion)
+    implementation(group: 'org.liquibase', name: 'liquibase-core', version: liquibaseVersion)
+    implementation(group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: springBootVersion)
+    implementation(group: 'org.springframework.boot', name: 'spring-boot-devtools', version: springBootVersion)
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: springBootVersion
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-cache', version: springBootVersion
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-websocket', version: springBootVersion
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-mail', version: springBootVersion
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf', version: springBootVersion
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-validation', version: springBootVersion
+    implementation group: 'com.textmagic.sdk', name: 'textmagic-java-sdk', version: '1.2.0'
+    implementation group: 'net.logstash.logback', name: 'logstash-logback-encoder', version: '7.2'
+
+
+
+    implementation group: 'com.github.ben-manes.caffeine', name: 'caffeine', version: '3.1.1'
+
+
+    implementation group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.1'
+
+    implementation group: 'io.springfox', name: 'springfox-boot-starter', version: '3.0.0'
+    //implementation group: 'org.springdoc', name: 'springdoc-openapi-ui', version: '1.6.11'
+
+    annotationProcessor "org.projectlombok:lombok-mapstruct-binding:0.2.0"
+    implementation(group:'org.mapstruct', name:'mapstruct', version: mapStructVersion)
+    annotationProcessor(group:'org.mapstruct', name:'mapstruct-processor', version: mapStructVersion)
+    implementation(group: 'org.projectlombok', name: 'lombok', version: lombokVersion)
+    annotationProcessor(group: 'org.projectlombok', name:'lombok', version: lombokVersion)
+    testImplementation(group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: springBootVersion) {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
+}
