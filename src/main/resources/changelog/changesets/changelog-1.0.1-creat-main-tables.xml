@@ -9,10 +9,30 @@
             <column name="user_id" type="uuid" >
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="phone_number" type="varchar(16)">
+            <column name="login" type="varchar(16)">
                 <constraints nullable="false" unique="true"/>
             </column>
             <column name="password" type="varchar(256)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <createTable tableName="message">
+            <column name="message_id" type="uuid" >
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="user_id" type="uuid">
+                <constraints nullable="false" unique="false"/>
+            </column>
+            <column name="text" type="varchar(512)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="is_edit" type="boolean" defaultValueBoolean="false">
+                <constraints nullable="false"/>
+            </column>
+            <column name="is_delete" type="boolean" defaultValueBoolean="false">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date_time" type="timestamp">
                 <constraints nullable="false"/>
             </column>
         </createTable>
