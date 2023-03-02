@@ -32,7 +32,7 @@ public class UserSecurityServiceImpl implements UserSecurityService {
 
     @Override
     public Optional<User> findByLoginOrEmail(String nickname) {
-        return userRepository.findUserByLoginOrEmail(nickname);
+        return userRepository.findUserByLogin(nickname);
     }
 
     @Override

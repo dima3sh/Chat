@@ -37,4 +37,16 @@
             </column>
         </createTable>
     </changeSet>
+    <changeSet id="1.0.2" author="DShysha">
+        <addForeignKeyConstraint  baseColumnNames="user_id"
+                                  baseTableName="message"
+                                  baseTableSchemaName="public"
+                                  constraintName="fk_user_message"
+                                  onDelete="CASCADE"
+                                  onUpdate="NO ACTION"
+                                  referencedColumnNames="user_id"
+                                  referencedTableName="user"
+                                  referencedTableSchemaName="public"
+                                  validate="true"/>
+    </changeSet>
 </databaseChangeLog>
