@@ -15,9 +15,5 @@ public class SignUpRequestDto {
     private String login;
 
     @NotNull
-    @Pattern(regexp = "^.+@?.+$")
-    private String email;
-
-    @NotNull
     private String password;
 }

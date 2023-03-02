@@ -5,7 +5,6 @@ import avtetika.com.authorization.dto.JwtRequestDto;
 import avtetika.com.authorization.dto.JwtResponseDto;
 import avtetika.com.authorization.dto.SignUpRequestDto;
 import avtetika.com.authorization.service.AuthService;
-import avtetika.com.authorization.service.UserSecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -24,12 +23,10 @@ import javax.validation.Valid;
 public class AuthController {
 
     private final AuthService authService;
-    private final UserSecurityService userService;
 
     @Autowired
-    public AuthController(AuthService authService, UserSecurityService userService) {
+    public AuthController(AuthService authService) {
         this.authService = authService;
-        this.userService = userService;
     }
 
     @PostMapping("login")
@@ -39,9 +36,8 @@ public class AuthController {
     }
 
     @PostMapping("signup")
-    public ResponseEntity<String> signUp(@Valid @RequestBody SignUpRequestDto request) {
-        userService.signUp(request);
-        return ResponseEntity.ok("Message send to email");
+    public ResponseEntity<JwtResponseDto> signUp(@Valid @RequestBody SignUpRequestDto request) {
+        return ResponseEntity.ok(authService.signUp(request));
     }
 
     @PostMapping("refresh")
