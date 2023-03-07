@@ -1,7 +1,10 @@
 package avtetika.com.chat.dto;
 
+import avtetika.com.chat.serialization.LocalDateTimeSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -14,5 +17,6 @@ public class ChatMessageResponseDto {
     private Boolean isUserOwner;
     private String text;
     private Boolean isEdit;
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
     private LocalDateTime dateTime;
 }

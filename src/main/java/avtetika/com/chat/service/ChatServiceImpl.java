@@ -14,6 +14,7 @@ import avtetika.com.websocket.enums.ActionType;
 import avtetika.com.websocket.service.ActionService;
 import org.mapstruct.factory.Mappers;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -39,7 +40,7 @@ public class ChatServiceImpl implements ChatService {
 
     @Override
     public List<ChatMessageResponseDto> findChatHistory(UUID userId, Integer page, Integer size) {
-        List<Message> messages = chatRepository.findAll(PageRequest.of(page, size)).getContent();
+        List<Message> messages = chatRepository.findAll(PageRequest.of(page, size, Sort.by("dateTime"))).getContent();
         return Mappers.getMapper(ChatMapping.class).map(messages, userId);
     }
 
@@ -53,6 +54,7 @@ public class ChatServiceImpl implements ChatService {
         message.setUser(userService.findUser(userId));
         message.setIsDelete(false);
         chatRepository.save(message);
+
         MessageAddingDto addingMessage = new MessageAddingDto();
         addingMessage.setText(addingMessage.getText());
         addingMessage.setMessageId(message.getMessageId());

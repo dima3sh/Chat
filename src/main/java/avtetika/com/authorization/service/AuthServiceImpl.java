@@ -7,7 +7,6 @@ import avtetika.com.entity.User;
 import avtetika.com.exception.ApiException;
 import avtetika.com.exception.user.UserNotFoundApiException;
 import avtetika.com.user.repository.UserRepository;
-import com.sun.istack.NotNull;
 import io.jsonwebtoken.Claims;
 import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
