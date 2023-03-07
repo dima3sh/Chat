@@ -37,7 +37,7 @@ public class AuthSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and()
                 .authorizeRequests()
-                .antMatchers("/api/user/**").authenticated()
+                .antMatchers("/api/chat/**").authenticated()
                 .antMatchers("userIngo").authenticated()
                 .antMatchers("/swagger-ui/**").permitAll()
                 .antMatchers("/v3/api-docs/**").permitAll()
