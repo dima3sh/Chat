@@ -18,7 +18,9 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -40,8 +42,10 @@ public class ChatServiceImpl implements ChatService {
 
     @Override
     public List<ChatMessageResponseDto> findChatHistory(UUID userId, Integer page, Integer size) {
-        List<Message> messages = chatRepository.findAll(PageRequest.of(page, size, Sort.by("dateTime"))).getContent();
-        return Mappers.getMapper(ChatMapping.class).map(messages, userId);
+        List<Message> messages = chatRepository.findAll(PageRequest.of(page, size, Sort.by("dateTime").descending())).getContent();
+        List<ChatMessageResponseDto> response = Mappers.getMapper(ChatMapping.class).map(messages, userId);
+        Collections.reverse(response);
+        return response;
     }
 
     @Override
