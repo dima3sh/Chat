@@ -42,7 +42,7 @@ public class ChatServiceImpl implements ChatService {
 
     @Override
     public List<ChatMessageResponseDto> findChatHistory(UUID userId, Integer page, Integer size) {
-        List<Message> messages = chatRepository.findAll(PageRequest.of(page, size, Sort.by("dateTime").descending())).getContent();
+        List<Message> messages = chatRepository.findAllByIsDelete(false, PageRequest.of(page, size, Sort.by("dateTime").descending())).getContent();
         List<ChatMessageResponseDto> response = Mappers.getMapper(ChatMapping.class).map(messages, userId);
         Collections.reverse(response);
         return response;
@@ -60,7 +60,7 @@ public class ChatServiceImpl implements ChatService {
         chatRepository.save(message);
 
         MessageAddingDto addingMessage = new MessageAddingDto();
-        addingMessage.setText(addingMessage.getText());
+        addingMessage.setText(message.getText());
         addingMessage.setMessageId(message.getMessageId());
         addingMessage.setDateTime(message.getDateTime());
         addingMessage.setUserId(userId);

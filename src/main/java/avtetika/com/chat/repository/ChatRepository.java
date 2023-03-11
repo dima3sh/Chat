@@ -10,4 +10,6 @@ import java.util.UUID;
 public interface ChatRepository extends PagingAndSortingRepository<Message, UUID> {
 
     Page<Message> findMessageByUserUserId(UUID userId, Pageable request);
+
+    Page<Message> findAllByIsDelete(Boolean isDelete, Pageable request);
 }
