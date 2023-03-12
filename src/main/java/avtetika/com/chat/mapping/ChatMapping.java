@@ -20,6 +20,7 @@ public interface ChatMapping {
         response.setIsEdit(message.getIsEdit());
         response.setText(message.getText());
         response.setMessageId(message.getMessageId());
+        response.setLogin(message.getUser().getLogin());
         response.setIsUserOwner(userId.equals(message.getUser().getUserId()));
         return response;
     }

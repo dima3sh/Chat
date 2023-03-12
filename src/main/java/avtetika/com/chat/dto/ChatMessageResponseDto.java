@@ -17,6 +17,7 @@ public class ChatMessageResponseDto {
     private Boolean isUserOwner;
     private String text;
     private Boolean isEdit;
+    private String login;
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     private LocalDateTime dateTime;
 }

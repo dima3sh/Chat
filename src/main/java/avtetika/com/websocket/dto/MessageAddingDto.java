@@ -18,6 +18,7 @@ public class MessageAddingDto extends AbstractAction {
     }
 
     private String text;
+    private String login;
     private UUID userId;
     private Boolean isUserOwner;
     private LocalDateTime dateTime;
