@@ -101,6 +101,7 @@ public class ChatServiceImpl implements ChatService {
                 return ActionType.DELETE_MESSAGE;
             }
         };
+        messageDeleting.setMessageId(messageId);
         actionService.notifyUser(messageDeleting, userService.findAll());
         return true;
     }
