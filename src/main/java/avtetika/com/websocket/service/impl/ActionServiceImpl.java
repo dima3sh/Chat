@@ -14,6 +14,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -56,7 +57,7 @@ public class ActionServiceImpl implements ActionService {
     @Async
     @Override
     public void addSession(UUID userId, String session) {
-        List<String> list = new ArrayList<>();
+        List<String> list = Optional.ofNullable(users.get(userId)).orElse(new ArrayList<>());
         list.add(session);
         users.put(userId, list);
     }
