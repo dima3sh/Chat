@@ -6,3 +6,5 @@ spec:
   containers:
     - name: app
       image: justman/gateway
+      ports:
+      - containerPort: 80
