@@ -6,6 +6,3 @@ spec:
   containers:
     - name: app
       image: justman/gateway
-      volumeMounts:
-        - name: ephemeral
-          mountPath: "/tmp"
