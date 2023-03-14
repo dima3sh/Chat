@@ -58,13 +58,8 @@ public class ChatServiceImpl implements ChatService {
         message.setIsDelete(false);
         chatRepository.save(message);
 
-        MessageAddingDto addingMessage = new MessageAddingDto();
-        addingMessage.setText(message.getText());
-        addingMessage.setMessageId(message.getMessageId());
-        addingMessage.setDateTime(message.getDateTime());
-        addingMessage.setUserId(userId);
+        MessageAddingDto addingMessage = Mappers.getMapper(ChatMapping.class).mapToMessage(message);
         addingMessage.setIsUserOwner(false);
-        addingMessage.setLogin(message.getUser().getLogin());
 
         List<UUID> users =  userService.findAll().stream().filter(x -> !x.equals(userId)).collect(Collectors.toList());
 

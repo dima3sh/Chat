@@ -2,8 +2,10 @@ package avtetika.com.chat.mapping;
 
 import avtetika.com.chat.dto.ChatMessageResponseDto;
 import avtetika.com.entity.Message;
+import avtetika.com.websocket.dto.MessageAddingDto;
 import org.mapstruct.Context;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
 
 import java.util.List;
@@ -14,14 +16,15 @@ public interface ChatMapping {
 
     List<ChatMessageResponseDto> map(List<Message> messages, @Context UUID userId);
 
-    default ChatMessageResponseDto map(Message message, @Context UUID userId) {
-        ChatMessageResponseDto response = new ChatMessageResponseDto();
-        response.setDateTime(message.getDateTime());
-        response.setIsEdit(message.getIsEdit());
-        response.setText(message.getText());
-        response.setMessageId(message.getMessageId());
-        response.setLogin(message.getUser().getLogin());
-        response.setIsUserOwner(userId.equals(message.getUser().getUserId()));
-        return response;
-    }
+    @Mapping(target="login", source="message.user.login")
+    @Mapping(target="userId", source="message.user.userId")
+    @Mapping(target="isUserOwner", expression = "java( false )")
+    MessageAddingDto mapToMessage(Message message);
+
+    @Mapping(target="login", source="message.user.login")
+    @Mapping(target="isUserOwner", expression = "java( userId.equals(message.getUser().getUserId()) )")
+    ChatMessageResponseDto map(Message message, @Context UUID userId);
+
+
+
 }

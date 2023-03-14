@@ -44,7 +44,6 @@ public class ActionServiceImpl implements ActionService {
             headerAccessor.setLeaveMutable(true);
             headerAccessor.setSessionId(session);
             messagingTemplate.convertAndSendToUser(session, ACTION_DESTINATION, action, headerAccessor.getMessageHeaders());
-            System.out.println("message was sent");
         }));
         } catch (Exception e) {
             System.out.println("Caught exception " + action.toString() + " ");
