@@ -10,15 +10,9 @@ import java.util.UUID;
 
 public interface UserService {
 
-    List<User> findUsers(Collection<UUID> request);
-
     List<UUID> findAll();
 
     User findUser(UUID userId);
 
-    List<UserResponseDto> searchUsers(String login, Integer size);
-
     Boolean isFreeParameter(String login, ParameterType type);
-
-    Boolean updateLogin(UUID userId, String login);
 }

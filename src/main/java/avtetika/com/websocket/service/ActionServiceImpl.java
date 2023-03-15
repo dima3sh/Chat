@@ -1,4 +1,4 @@
-package avtetika.com.websocket.service.impl;
+package avtetika.com.websocket.service;
 
 import avtetika.com.websocket.dto.AbstractAction;
 import avtetika.com.websocket.service.ActionService;

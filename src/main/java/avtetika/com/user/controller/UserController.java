@@ -26,7 +26,6 @@ public class UserController {
         this.userService = userService;
     }
 
-
     @GetMapping(value = "/check/{parameter}", params = {"type"})
     public ResponseEntity<Boolean> checkParameter(@PathVariable("parameter") String parameter, @RequestParam ParameterType type) {
         Boolean response = userService.isFreeParameter(parameter, type);
